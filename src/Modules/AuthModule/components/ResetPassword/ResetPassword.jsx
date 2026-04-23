@@ -4,10 +4,9 @@ import { Field, FieldLabel, FieldError } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Mail, Key, Eye, EyeOff, Loader2, Check } from "lucide-react";
-import useAuth from "@/hooks/useAuth"; // لو انت حاطه في hooks/useAuth.js
+import useAuth from "../../../../Hooks/useAuth";
 
 export default function ResetPassword() {
-
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
 
@@ -39,7 +38,6 @@ export default function ResetPassword() {
       onSubmit={handleSubmit(onSubmit)}
       className="w-full max-w-xl space-y-5"
     >
-
       <h2 className="text-[#C5D86D] font-bold text-2xl md:text-3xl">
         Reset password
       </h2>
@@ -47,9 +45,13 @@ export default function ResetPassword() {
       {/* Email */}
       <Field>
         <FieldLabel className="text-white mb-1">Your email address</FieldLabel>
-        <div className={`flex items-center bg-[#0f111a] border-2 rounded-[10px] px-4 h-12 ${
-          errors.email ? "border-red-500" : "border-white focus-within:border-[#C5D86D]"
-        }`}>
+        <div
+          className={`flex items-center bg-[#0f111a] border-2 rounded-[10px] px-4 h-12 ${
+            errors.email
+              ? "border-red-500"
+              : "border-white focus-within:border-[#C5D86D]"
+          }`}
+        >
           <Mail className="text-white mr-3" />
           <Input
             type="email"
@@ -58,15 +60,23 @@ export default function ResetPassword() {
             className="bg-transparent border-none text-white focus-visible:ring-0"
           />
         </div>
-        {errors.email && <FieldError className="text-red-500">{errors.email.message}</FieldError>}
+        {errors.email && (
+          <FieldError className="text-red-500">
+            {errors.email.message}
+          </FieldError>
+        )}
       </Field>
 
       {/* OTP */}
       <Field>
         <FieldLabel className="text-white mb-1">OTP</FieldLabel>
-        <div className={`flex items-center bg-[#0f111a] border-2 rounded-[10px] px-4 h-12 ${
-          errors.otp ? "border-red-500" : "border-white focus-within:border-[#C5D86D]"
-        }`}>
+        <div
+          className={`flex items-center bg-[#0f111a] border-2 rounded-[10px] px-4 h-12 ${
+            errors.otp
+              ? "border-red-500"
+              : "border-white focus-within:border-[#C5D86D]"
+          }`}
+        >
           <Mail className="text-white mr-3" />
           <Input
             type="text"
@@ -75,50 +85,80 @@ export default function ResetPassword() {
             className="bg-transparent border-none text-white focus-visible:ring-0"
           />
         </div>
-        {errors.otp && <FieldError className="text-red-500">{errors.otp.message}</FieldError>}
+        {errors.otp && (
+          <FieldError className="text-red-500">{errors.otp.message}</FieldError>
+        )}
       </Field>
 
       {/* Password */}
       <Field>
         <FieldLabel className="text-white mb-1">Password</FieldLabel>
-        <div className={`flex items-center bg-[#0f111a] border-2 rounded-[10px] px-4 h-12 ${
-          errors.password ? "border-red-500" : "border-white focus-within:border-[#C5D86D]"
-        }`}>
+        <div
+          className={`flex items-center bg-[#0f111a] border-2 rounded-[10px] px-4 h-12 ${
+            errors.password
+              ? "border-red-500"
+              : "border-white focus-within:border-[#C5D86D]"
+          }`}
+        >
           <Key className="text-white mr-3" />
           <Input
             type={showPassword ? "text" : "password"}
             placeholder="Type your password"
-            {...register("password", { required: "Password is required", minLength: { value: 6, message: "Minimum 6 characters" } })}
+            {...register("password", {
+              required: "Password is required",
+              minLength: { value: 6, message: "Minimum 6 characters" },
+            })}
             className="flex-1 bg-transparent border-none text-white focus-visible:ring-0"
           />
           <button type="button" onClick={() => setShowPassword(!showPassword)}>
-            {showPassword ? <EyeOff className="text-white" size={20}/> : <Eye className="text-white" size={20}/>}
+            {showPassword ? (
+              <EyeOff className="text-white" size={20} />
+            ) : (
+              <Eye className="text-white" size={20} />
+            )}
           </button>
         </div>
-        {errors.password && <FieldError className="text-red-500">{errors.password.message}</FieldError>}
+        {errors.password && (
+          <FieldError className="text-red-500">
+            {errors.password.message}
+          </FieldError>
+        )}
       </Field>
 
       {/* Confirm Password */}
       <Field>
         <FieldLabel className="text-white mb-1">Confirm Password</FieldLabel>
-        <div className={`flex items-center bg-[#0f111a] border-2 rounded-[10px] px-4 h-12 ${
-          errors.confirmPassword ? "border-red-500" : "border-white focus-within:border-[#C5D86D]"
-        }`}>
+        <div
+          className={`flex items-center bg-[#0f111a] border-2 rounded-[10px] px-4 h-12 ${
+            errors.confirmPassword
+              ? "border-red-500"
+              : "border-white focus-within:border-[#C5D86D]"
+          }`}
+        >
           <Key className="text-white mr-3" />
           <Input
             type={showConfirm ? "text" : "password"}
             placeholder="Confirm password"
             {...register("confirmPassword", {
               required: "Confirm password is required",
-              validate: (value) => value === password || "Passwords do not match",
+              validate: (value) =>
+                value === password || "Passwords do not match",
             })}
             className="flex-1 bg-transparent border-none text-white focus-visible:ring-0"
           />
           <button type="button" onClick={() => setShowConfirm(!showConfirm)}>
-            {showConfirm ? <EyeOff className="text-white" size={20}/> : <Eye className="text-white" size={20}/>}
+            {showConfirm ? (
+              <EyeOff className="text-white" size={20} />
+            ) : (
+              <Eye className="text-white" size={20} />
+            )}
           </button>
         </div>
-        {errors.confirmPassword && <FieldError className="text-red-500">{errors.confirmPassword.message}</FieldError>}
+        {errors.confirmPassword && (
+          <FieldError className="text-red-500">
+            {errors.confirmPassword.message}
+          </FieldError>
+        )}
       </Field>
 
       {/* Submit Button */}
@@ -129,7 +169,11 @@ export default function ResetPassword() {
       >
         <span>{loading ? "Updating..." : "Reset Password"}</span>
         <div className="bg-black text-white rounded-full p-1 flex items-center justify-center">
-          {loading ? <Loader2 size={15} strokeWidth={4} className="animate-spin"/> : <Check size={15} strokeWidth={4}/>}
+          {loading ? (
+            <Loader2 size={15} strokeWidth={4} className="animate-spin" />
+          ) : (
+            <Check size={15} strokeWidth={4} />
+          )}
         </div>
       </Button>
     </form>
